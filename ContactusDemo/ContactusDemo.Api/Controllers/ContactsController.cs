@@ -10,7 +10,7 @@ using ContactusDemo.Api.Models;
 namespace ContactusDemo.Api.Controllers
 {
     [Route("api/v1.00/[controller]")]
-    public class ContactController : Controller
+    public class ContactsController : Controller
     {
         // GET api/values
         [HttpGet]
