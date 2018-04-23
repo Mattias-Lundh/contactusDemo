@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactusDemo.Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("api/v1.00/[controller]")]
+    public class ContactController : Controller
     {
         // GET api/values
         [HttpGet]
