@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using ContactusDemo.Api.Models;
 
 namespace ContactusDemo.Api.Controllers
 {
@@ -25,8 +28,10 @@ namespace ContactusDemo.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]JObject contactItem)
         {
+            ContactItem contact = contactItem.ToObject<ContactItem>();
+
         }
 
         // PUT api/values/5
