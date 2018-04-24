@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ContactusDemo.Api.Models;
+using RabbitMQ.Client;
+
 
 namespace ContactusDemo.Api.Controllers
 {
