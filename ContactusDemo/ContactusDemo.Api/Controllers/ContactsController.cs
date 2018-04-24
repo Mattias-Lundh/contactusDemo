@@ -8,13 +8,20 @@ using Newtonsoft.Json;
 using ContactusDemo.Api.Models;
 using ContactusDemo.Api.MessageBroker;
 using RabbitMQ.Client;
-
+using Microsoft.Extensions.Logging;
 
 namespace ContactusDemo.Api.Controllers
 {
     [Route("api/v1.00/[controller]")]
     public class ContactsController : Controller
     {
+        private readonly ILogger<ContactsController> _logger;
+
+        public ContactsController(ILogger<ContactsController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -35,11 +42,9 @@ namespace ContactusDemo.Api.Controllers
         {
             ContactItem contact = data.ToObject<ContactItem>();
 
-            IMessageSender Sender = new NormalSender(contact.Telephone, "localhost", "hello");
-
+            IMessageSender Sender = new NormalSender(contact, "localhost", "hello");
             Sender.SendData();
-
-
+            _logger.LogInformation("Data sent to message broker: {0}, {1}, {2}", contact.Address, contact.Email, contact.Telephone);
 
         }
 

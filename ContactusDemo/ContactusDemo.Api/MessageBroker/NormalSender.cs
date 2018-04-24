@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using ContactusDemo.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace ContactusDemo.Api.MessageBroker
 {
     public class NormalSender : IMessageSender
     {
-        public NormalSender(string message, string host, string queue)
+        public NormalSender(ISendable message, string host, string queue)
         {
             _message = message;
             _host = host;
             _queue = queue;
         }
 
-        private string _message;
+        private ISendable _message;
         private string _host;
         private string _queue;
 
@@ -34,7 +35,7 @@ namespace ContactusDemo.Api.MessageBroker
                                          autoDelete: false,
                                          arguments: null);
 
-                    var body = Encoding.UTF8.GetBytes(_message);
+                    var body = Encoding.UTF8.GetBytes(_message.Pack());
 
                     channel.BasicPublish(exchange: "",
                                          routingKey: _queue,
