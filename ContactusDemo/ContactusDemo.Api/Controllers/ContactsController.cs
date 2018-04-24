@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ContactusDemo.Api.Models;
+using ContactusDemo.Api.MessageBroker;
 using RabbitMQ.Client;
 
 
@@ -32,7 +33,13 @@ namespace ContactusDemo.Api.Controllers
         [HttpPost]
         public void Post([FromBody]JObject data)
         {
-            ContactItem contact = data.ToObject<ContactItem>();        
+            ContactItem contact = data.ToObject<ContactItem>();
+
+            IMessageSender Sender = new NormalSender(contact.Telephone, "localhost", "hello");
+
+            Sender.SendData();
+
+
 
         }
 
