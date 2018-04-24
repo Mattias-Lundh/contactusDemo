@@ -30,9 +30,9 @@ namespace ContactusDemo.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]JObject contactItem)
+        public void Post([FromBody]JObject data)
         {
-            ContactItem contact = contactItem.ToObject<ContactItem>();
+            ContactItem contact = data.ToObject<ContactItem>();        
 
         }
 
